@@ -1,0 +1,374 @@
+/*!
+ Copyright (c) 2001-2017 by Wincor Nixdorf International GmbH,
+ Heinz-Nixdorf-Ring 1, 33106 Paderborn, Germany
+
+ This software is the confidential and proprietary information
+ of Wincor Nixdorf.
+ You shall not disclose such Confidential Information and shall
+ use it only in accordance with the terms of the license agreement
+ you entered into with Wincor Nixdorf.
+
+
+*/
+
+/*Place your changes here*/
+/* padding: top right bottom left; */
+
+/*---- Screen ----*/
+:root {
+    background: url('/../../../../../Campaign/Backgrounds/ASAI_Background.webp') !important; 
+    
+    
+}
+
+/*---- Images Carrousel ----*/
+
+.button {
+    /*background: linear-gradient(180deg, rgba(200, 170, 10, 1) 0%, rgba(217, 89, 15, 1) 100%);*/
+	background: linear-gradient(to bottom, #d4c274 0%, #966a04 73%);
+	box-shadow: 2px 2px 2px 2px rgba(127,127,127,0.6)!important;	
+    border: 0px solid var(--color01);
+    transition: border 0.15s;
+}
+
+.ATMOnlyPattern {
+	height: 100%;
+    width: 100%;
+    background-image: url('/../../../../../Campaign/Backgrounds/ASAI_ATMOnly.webp');
+	position: fixed;
+		
+}
+
+.NOTATMPattern {
+	height: 100%;
+    width: 100%;
+    background-image: url('/../../../../../Campaign/Backgrounds/ASAI_NOTATM.webp');
+	position: fixed;
+		
+}
+
+.overlay {
+  position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: opacity 500ms;
+    visibility: visible;
+    opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+ margin: 70px auto;
+    padding: 20px;
+    background: #000;
+    border-radius: 15px;
+    position: relative;
+    top: 80%;
+    height: 10%;
+    transition: all 5s ease-in-out;
+    visibility: visible;
+    opacity: 1;
+    max-width: 90%;
+	border: 3px solid #fff;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #fff;
+  font-family: Tahoma, Arial, sans-serif;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform : uppercase;
+
+}
+
+.popup .content {
+  margin-top: 10px;
+  max-height: 60%;
+  overflow: auto;
+  text-transform : uppercase;
+ 
+
+}
+
+@keyframes slidy {
+    /*0% { left: 0%; }
+    20% { left: 0%; }
+    25% { left: -100%; }
+    45% { left: -100%; }
+    50% { left: -200%; }
+    70% { left: -200%; }
+    75% { left: -300%; }
+    95% { left: -300%; }
+    100% { left: -400%; }*/
+   
+    0% { left: 0%;  opacity:0;}
+	5% { left: 0%;  opacity:0.3;}
+	
+    10% { left: 0%;  opacity:0.5}
+    25%,29% { left: 0%;  opacity:1}
+    30% { left: 0%;  opacity:1}
+    40% { left: 0%;  opacity:0.5}
+    55%,59% { left: 0%;  opacity:0}
+
+    60% { left: -100%;  opacity:0}
+	65% { left: -100%;  opacity:0.3}
+	
+    70% { left: -100%;  opacity:0.5}
+    85%,89% { left: -100%;  opacity:1}
+    90% { left: -100%;  opacity:1}
+    95% { left: -100%;  opacity:0.5}
+    95%,100% { left: -100%;  opacity:0}
+    
+    }
+ .text-effects{
+        box-sizing: border-box;
+        font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+        font-size: 92px;
+        padding: 80px 50px;
+        text-align: center;
+        text-transform: uppercase;
+        text-rendering: optimizeLegibility;
+		background-color: #e7e5e4;
+    border: 5px solid #dedbdb;
+        outline: 5px solid #007;
+
+          color: #131313;
+          
+          letter-spacing: .15em;
+          text-shadow: 
+            1px -1px 0 #767676, 
+            -1px 2px 1px #737272, 
+            -2px 4px 1px #767474, 
+            -3px 6px 1px #787777, 
+            -4px 8px 1px #7b7a7a, 
+            -5px 10px 1px #7f7d7d, 
+            -6px 12px 1px #828181, 
+            -7px 14px 1px #868585, 
+            -8px 16px 1px #8b8a89, 
+            -9px 18px 1px #8f8e8d, 
+            -10px 20px 1px #949392, 
+            -11px 22px 1px #999897, 
+            -12px 24px 1px #9e9c9c, 
+            -13px 26px 1px #a3a1a1, 
+            -14px 28px 1px #a8a6a6, 
+            -15px 30px 1px #adabab, 
+            -16px 32px 1px #b2b1b0, 
+            -17px 34px 1px #b7b6b5, 
+            -18px 36px 1px #bcbbba, 
+            -19px 38px 1px #c1bfbf, 
+            -20px 40px 1px #c6c4c4, 
+            -21px 42px 1px #cbc9c8, 
+            -22px 44px 1px #cfcdcd, 
+            -23px 46px 1px #d4d2d1, 
+            -24px 48px 1px #d8d6d5, 
+            -25px 50px 1px #dbdad9, 
+            -26px 52px 1px #dfdddc, 
+            -27px 54px 1px #e2e0df, 
+            -28px 56px 1px #e4e3e2;
+
+           
+
+       
+      }
+    
+    
+    #slider { 
+        overflow :visible; 
+		/*position: fixed;
+		top: 0;
+		height: 85%;
+		left: 0;
+        width: 100%*/
+    }
+    #slider figure p { width:50%; float: left; }
+	#slider figure img { 
+		width: 50%;
+		height: 90%;
+		float: left;
+        visibility:hidden;
+	}
+    #slider figure { 
+      position: relative;
+      width: 200%;
+	 
+      margin: 0;
+      left: 0;
+	  top:10%;
+	  height: 90%;
+        
+     
+      font-size: 0;
+      /*animation: 20s slidy infinite; */
+    }
+
+.slide {
+        position: absolute;
+        border: none; 
+	    opacity: 0; 
+        width: 100%;
+        height: 100%;
+        top:-1px;
+	    -webkit-transition: opacity 2s linear;
+	    -moz-transition: opacity 2s linear;
+	    -o-transition: opacity 2s linear;
+	    transition: opacity 2s linear;
+	}
+
+.showMe {
+		opacity: 1;
+	}
+
+#magstripe{
+    top:0;
+    position: fixed;
+}
+#emv{
+    top:0;
+    position: fixed;
+}
+
+.ASAIbutton02 {
+    width: 419px !important;
+}
+
+.ASAIbuttonCancel {
+	visibility: visible !important;
+	background: linear-gradient(to bottom, #df0c0c 0%, #780808 78%) !important;
+	box-shadow: 2px 2px 2px 2px rgba(127,127,127,0.6)!important;
+}
+
+.ASAIbuttonConfirm {
+	visibility: visible !important;
+	background: linear-gradient(to bottom, #457800 0%, #233d00 81%) !important;
+	box-shadow: 2px 2px 2px 2px rgba(127,127,127,0.6)!important;
+}
+
+.ASAIbuttonSkip{
+	visibility: visible !important;
+	background: linear-gradient(to bottom, #7a7a7a 0%, #3b3b3b 78%) !important;
+	box-shadow: 2px 2px 2px 2px rgba(127,127,127,0.6)!important;
+}
+
+.ASAIbuttonYellow{
+	visibility: visible !important;
+	background: linear-gradient(to bottom, #3B3486 0%, #171c45 78%) !important;
+	box-shadow: 2px 2px 2px 2px rgba(127,127,127,0.6)!important;
+}
+
+/*--- Multiple Tickets screen--*/
+.tbMultTicket {
+        background-color: white !important;
+        color: #3b3b3b !important;
+        min-width: 90% !important;
+        text-align: center !important;
+        padding: 10px !important;
+        margin-left: 40px !important;
+	    font-family: Titillium;
+	    text-shadow: 2px 2px 2px rgba(127,127,127,0.6)!important;
+    	font-size: x-large;
+		font-weight: bolder;
+		line-height: 38px;
+    }
+
+	.tbMultTicket > caption {
+            border: 1px solid #e9e9e9 !important;
+    		font-weight: bold;
+    		color: white;
+    		background-color: #29282c;
+    		padding: 10px;
+        }
+
+        .tbMultTicket tr th {
+            border: 1px solid #e9e9e9 !important;
+    		background-color: #99959e;
+    		color: white;
+    		padding: 10px;
+        }
+
+        .tbMultTicket tr td {
+		    border: 1px solid #e9e9e9;
+    		padding: 5px;
+        }
+
+.tbMultTicket tbody tr:nth-of-type(odd) {
+            background-color: rgb(242, 242, 242);
+        }
+
+.tbMultTicket tbody tr:nth-child(even) {
+    background-color: white;
+}
+
+
+
+/*--- Cards Style --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    font-family: 'Rubik', sans-serif;
+}
+
+.container .card{
+    background-color: #f6f5f5;
+    margin:3%;
+    width: 300px;
+    height: 350px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    font-family: 'Rubik', sans-serif;
+}
+
+h1.aa{
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 5%;
+    font-size: 2em;
+    border-top-left-radius: 10px ;
+    border-top-right-radius: 10px;
+    font-family: 'Rubik', sans-serif;
+}
+
+.card .card-content{
+    padding-left: 10%;
+    font-family: 'Rubik', sans-serif;
+}
+
+hr{
+    background-color: black;
+    border: none;
+    height: 3px;
+    font-family: 'Rubik', sans-serif;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+h3 h4{
+    color: #000 !important;
+}
+
+h1.amount{
+    color: #000 !important;
+}
+
+.card-footer{
+    display: flex;
+    padding-right: 5%;
+    justify-content: flex-end;
+    font-size: 1.5em;
+    font-family: 'Rubik', sans-serif;
+}
+

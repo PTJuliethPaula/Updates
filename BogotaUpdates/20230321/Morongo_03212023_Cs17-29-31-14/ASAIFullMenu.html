@@ -1,0 +1,79 @@
+<!--
+$Date: 2017/01/09 15:37:38MEZ $
+$Revision: 1.75 $ $ReleaseRevision: 1.75 $
+-->
+<main id="flexMain">
+
+    <!-- nav -->
+    <nav id="flexNav">
+		<div id="flexNavSK00"></div>
+        <div id="flexNavSK01"></div>
+        <div id="flexNavSK02"></div>
+		<div id="flexNavSK03"></div>
+	</nav>
+
+    <!-- article -->
+    <article id="flexArticle"></article>
+
+    <!-- aside -->
+    <aside id="flexAside">
+        <div id="flexAsideSK00">
+            <canvas class="rectangleDrawingCanvas"></canvas>
+            <div class="button button02 skRight iconButton, ASAIbutton02"
+                 data-bind="command: {id: 'BUTTON_IDLE_LOOP_RIGHT2',
+                              type: CMDTYPE.BUTTON,
+                              args: 'ATM',
+                              state: CMDSTATE.ENABLED,
+                              label: {text: getLabel('GUI_[#VIEW_KEY#]_Button_ATM', 'ATM')},
+                             eppkey: 'F2'}">
+                <object type="image/svg+xml" data="style/default/images/icon-atm.svg"></object>
+                <var class="color03 font01" data-bind="html: cmdRepos.getCmdLabel('BUTTON_IDLE_LOOP_RIGHT2')"></var>
+            </div>
+        </div>
+      <div id="flexAsideSK01">
+            <canvas class="rectangleDrawingCanvas"></canvas>
+            <div class="button button02 skRight iconButton, ASAIbutton02"
+                 data-bind="command: {id: 'BUTTON_IDLE_LOOP_RIGHT3',
+                              type: CMDTYPE.BUTTON,
+                              args: 'CA',
+                              state: CMDSTATE.ENABLED,
+                              label: {text: getLabel('GUI_[#VIEW_KEY#]_Button_CashAdvance', 'Cash Advance')},
+                             eppkey: 'F3'}">
+                <object type="image/svg+xml" data="style/default/images/icon-cash.svg"></object>
+                <var class="color03 font01" data-bind="html: cmdRepos.getCmdLabel('BUTTON_IDLE_LOOP_RIGHT3')"></var>
+            </div>
+        </div>
+        <div id="flexAsideSK02">
+			<canvas class="rectangleDrawingCanvas"></canvas>
+            <div class="button button02 skRight iconButton, ASAIbutton02"
+                 data-bind="command: {id: 'BUTTON_IDLE_LOOP_RIGHT4',
+                              type: CMDTYPE.BUTTON,
+                              args: 'POS',
+                              state: CMDSTATE.ENABLED,
+                              label: {text: getLabel('GUI_[#VIEW_KEY#]_Button_POSTicket', 'POS Ticket')},
+                             eppkey: 'F4'}">
+                <object type="image/svg+xml" data="style/default/images/icon-ticket.svg"></object>
+                <var class="color03 font01" data-bind="html: cmdRepos.getCmdLabel('BUTTON_IDLE_LOOP_RIGHT4')"></var>
+            </div>
+		</div> 
+        <div id="flexAsideSK03"></div>
+    </aside>
+</main>
+
+<!-- footer -->
+<footer id="flexFooter">
+    <div id="flexExtra"></div>
+    <div id="flexCancel">
+        <!--<div class="buttonZone">
+            <div id="buttonCancel" class="button footerButton"
+                    data-bind="command: {id: 'CANCEL', 
+							type: CMDTYPE.BUTTON,
+							adaType: ADA_TYPE.FUNCTION_KEY,
+							state: CMDSTATE.ENABLED,
+							label: {html: getLabel('GUI_[#VIEW_KEY#]_Button_Cancel', 'Cancel')}, 
+							eppkey: 'CANCEL'}">
+                <var class="color09 font01" data-bind="html: cmdRepos.getCmdLabel('CANCEL')"></var>
+            </div>-->
+        </div>
+    </div>
+</footer>
