@@ -1,0 +1,16 @@
+
+For each of the following files first make a backup
+1. Copy files to c:\Asai\HostSim :
+* HostSim.exe
+* HostSim.exe.config
+* local.cer
+* local.pfx
+2. Replace file in c:\Proflex4\Base\Java\keystore (Remember to backup the original file first)
+* truststore_DH.jks
+3. Run the registry file hostsimssl_for_cert.reg
+4. Restart
+
+
+1. Instalar el update de Mike (ejecutar bat)
+2. Card Reader Reset (ejecutar bat)
+3. Ejecutar archivos Registro y luego si reemplazar los archivos Jar

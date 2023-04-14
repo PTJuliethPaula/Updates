@@ -1,0 +1,17 @@
+
+"TRANSACTION\GENERAL"		"ASAICardReaderResetCounter"		"0"
+
+"CCSTPTAB\ST_BAS_TransactionEnd\CallTransactionEndLocal"		"STEP_FUNC"		"CALL_SCRIPT"
+"CCSTPTAB\ST_BAS_TransactionEnd\CallTransactionEndLocal"		"STEP_PARAM"	"ST_BAS_TransactionEndLocal"
+"CCSTPTAB\ST_BAS_TransactionEnd\CallTransactionEndLocal"		"JUMP_ON_RC"	"ASAICheckCardReaderStatus,TransactionEndFailed,,,,ScriptError"
+
+"CCSTPTAB\ST_BAS_TransactionEnd\ASAICheckCardReaderStatus"		"STEP_FUNC"		"ASAICCCardFWStep"
+"CCSTPTAB\ST_BAS_TransactionEnd\ASAICheckCardReaderStatus"		"STEP_PARAM"	"CARD_READER_STATUS"
+"CCSTPTAB\ST_BAS_TransactionEnd\ASAICheckCardReaderStatus"		"JUMP_ON_RC"	"TransactionEndSuccessful,TransactionEndFailed,ScriptError"
+
+
+"DATADICT\PROPERTIES\ASAICCCARDFW_JOURNAL"		"OWNER_FW"		"CCTransactionFW"
+"DATADICT\PROPERTIES\ASAICCCARDFW_JOURNAL"		"DATA_TYPE"		"STRING"
+
+"JOURNAL\TOPMSG" 		"MSG500003"		"@005 @001 '%ASAICCCARDFW_JOURNAL%'  #NL#"
+

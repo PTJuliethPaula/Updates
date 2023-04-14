@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment></comment>
+<entry key="DATA_TYPE">STRING</entry>
+<entry key="OWNER_FW">CCTransactionFW</entry>
+<entry key="CHARSET">ANSI</entry>
+<entry key="SEND_EVENT">0</entry>
+<entry key="SET_SUPPORTED">1</entry>
+<entry key="RETURN_NOT_SET">1</entry>
+<entry key="INIT_STEP">TRANSACTION</entry>
+<entry key="INIT_VALUE"></entry>
+<entry key="ARRAY_SIZE">1</entry>
+
+</properties>

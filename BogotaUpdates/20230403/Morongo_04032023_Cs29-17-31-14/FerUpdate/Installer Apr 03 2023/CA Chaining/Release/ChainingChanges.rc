@@ -1,0 +1,123 @@
+
+"DATADICT\PROPERTIES\ASAICOUT_HOSTCANCEL_TRANSACTION"		"DATA_TYPE"  "STRING"
+"DATADICT\PROPERTIES\ASAICOUT_HOSTCANCEL_TRANSACTION"		"OWNER_FW"  "CCTransactionFW"
+"DATADICT\PROPERTIES\ASAICOUT_HOSTCANCEL_TRANSACTION"		"CHARSET"  "ANSI"
+"DATADICT\PROPERTIES\ASAICOUT_HOSTCANCEL_TRANSACTION"		"SEND_EVENT"  "0"
+"DATADICT\PROPERTIES\ASAICOUT_HOSTCANCEL_TRANSACTION"		"COMMENT"  "steploader: created at 2020-04-20T14:21"
+
+
+
+"CCSTPTAB\ST_COUT_Authorization\CallAuthorization"		"STEP_FUNC"  "CALL_SCRIPT"
+"CCSTPTAB\ST_COUT_Authorization\CallAuthorization"		"STEP_PARAM"  "ST_BAS_Authorization"
+"CCSTPTAB\ST_COUT_Authorization\CallAuthorization"		"JUMP_ON_RC"  "AuthorizationProcessed,AuthorizationFailed,,CustomerCancel,,ScriptError,AuthorizationFailed,SetCoutHostCancel,HandleResubmittedAmount,CallAuthorization"
+
+"CCSTPTAB\ST_COUT_Authorization\SetCoutHostCancel"		"STEP_FUNC"  "SET_PROPERTY"
+"CCSTPTAB\ST_COUT_Authorization\SetCoutHostCancel"		"STEP_PARAM"  "ASAICOUT_HOSTCANCEL_TRANSACTION,1"
+"CCSTPTAB\ST_COUT_Authorization\SetCoutHostCancel"		"JUMP_ON_RC"  "AuthorizationFailed,,,,,,,,,,,,,,,,,,ScriptError"
+
+
+
+"CCSTPTAB\ST_BAS_CustomerPersonificationCard\CheckIfCardAlreadyInserted"	"STEP_FUNC"  "CHECK_DATA"
+"CCSTPTAB\ST_BAS_CustomerPersonificationCard\CheckIfCardAlreadyInserted"	"STEP_PARAM"  "P,CCTAFW_PROP_CARD_ACTIVE,1,0"
+"CCSTPTAB\ST_BAS_CustomerPersonificationCard\CheckIfCardAlreadyInserted"	"JUMP_ON_RC"  "ShowGeneralErrorInfo,ShowGeneralErrorInfo,,,,,CustomerPersonified,CheckCardPositionStatus"
+
+"CCSTPTAB\ST_BAS_CustomerPersonificationCard\CheckCardPositionStatus"	"STEP_FUNC"  "CHECK_DATA"
+"CCSTPTAB\ST_BAS_CustomerPersonificationCard\CheckCardPositionStatus"	"STEP_PARAM"  "P,CCTAFW_PROP_CARD_POSITION_STATUS,0"
+"CCSTPTAB\ST_BAS_CustomerPersonificationCard\CheckCardPositionStatus"	"JUMP_ON_RC"  "CallCardInsert,CallCardInsert,,,,,CustomerPersonified"
+
+
+
+"CCSTPTAB\ST_BAS_CardEject_DOC"		"SOURCE"    "Flow_PRODUCT_BASE/src-gen/feature_base/ST_BAS_CardEject_DOC.rc"
+"CCSTPTAB\ST_BAS_CardEject_DOC"		"STEP_START"    "CheckSelectedFunctionForChaining"
+"CCSTPTAB\ST_BAS_CardEject_DOC"		"STEP_ABORT"    "ScriptError"
+"CCSTPTAB\ST_BAS_CardEject_DOC"		"ACTIVATE_WATCHDOG"    "0"
+
+
+"CCSTPTAB\ST_BAS_CardEject_DOC\CheckSelectedFunctionForChaining"		"STEP_FUNC"    "CHECK_DATA"
+"CCSTPTAB\ST_BAS_CardEject_DOC\CheckSelectedFunctionForChaining"		"STEP_PARAM"    "P,CCTAFW_PROP_INTERNAL_FUNCTION_SELECTION_CODE,COUT,BAL,TRA"
+"CCSTPTAB\ST_BAS_CardEject_DOC\CheckSelectedFunctionForChaining"		"JUMP_ON_RC"    "CheckCardEject,CheckCardEject,,,,,CheckCoutHostCancel,ShowContinueTransactionQuestion,ShowContinueTransactionQuestion"
+
+
+"CCSTPTAB\ST_BAS_CardEject_DOC\CheckCoutHostCancel"		"STEP_FUNC"    "CHECK_DATA"
+"CCSTPTAB\ST_BAS_CardEject_DOC\CheckCoutHostCancel"		"STEP_PARAM"    "P,ASAICOUT_HOSTCANCEL_TRANSACTION,1"
+"CCSTPTAB\ST_BAS_CardEject_DOC\CheckCoutHostCancel"		"JUMP_ON_RC"    "CheckCardEject,CheckCardEject,,,,,ShowContinueTransactionQuestion"
+
+
+
+
+"CCSTPTAB\ST_EMV_MainFlow_CardEmvappimpPinMenu\CallIdleLoop"		"SOURCE"    "Flow_PRODUCT_BASE/src-gen/feature_ada/feature_emv/ST_EMV_MainFlow_CardEmvappimpPinMenu_CallIdleLoop.rc"
+"CCSTPTAB\ST_EMV_MainFlow_CardEmvappimpPinMenu\CallIdleLoop"		"STEP_FUNC"    "CALL_SCRIPT"
+"CCSTPTAB\ST_EMV_MainFlow_CardEmvappimpPinMenu\CallIdleLoop"		"STEP_PARAM"    "ASAIST_BAS_IdleLoop"
+"CCSTPTAB\ST_EMV_MainFlow_CardEmvappimpPinMenu\CallIdleLoop"		"JUMP_ON_RC"    "CallLaunchEmvappimpChipProcessing,CallTransactionCancelled,,,,Reboot,CallOutOfService,CheckCoutHostCancel"
+
+"CCSTPTAB\ST_EMV_MainFlow_CardEmvappimpPinMenu\ClearCoutHostCancel"		"STEP_FUNC"    "SET_PROPERTY"
+"CCSTPTAB\ST_EMV_MainFlow_CardEmvappimpPinMenu\ClearCoutHostCancel"		"STEP_PARAM"    "ASAICOUT_HOSTCANCEL_TRANSACTION,0"
+"CCSTPTAB\ST_EMV_MainFlow_CardEmvappimpPinMenu\ClearCoutHostCancel"		"JUMP_ON_RC"    "CallMenu,,,,,,,,,,,,,,,,,,Reboot"
+
+"CCSTPTAB\ST_EMV_MainFlow_CardEmvappimpPinMenu\CheckCoutHostCancel"		"STEP_FUNC"    "CHECK_DATA"
+"CCSTPTAB\ST_EMV_MainFlow_CardEmvappimpPinMenu\CheckCoutHostCancel"		"STEP_PARAM"    "P,ASAICOUT_HOSTCANCEL_TRANSACTION,1"
+"CCSTPTAB\ST_EMV_MainFlow_CardEmvappimpPinMenu\CheckCoutHostCancel"		"JUMP_ON_RC"    "ClearCoutHostCancel,ClearCoutHostCancel,,,,,CallCustomerVerification"
+
+
+
+
+"CCSTPTAB\ST_BAS_TransactionCancelled\ProcessCancel"	"STEP_FUNC"  "BAS_CANCELLED"
+"CCSTPTAB\ST_BAS_TransactionCancelled\ProcessCancel"	"STEP_PARAM"  ""
+"CCSTPTAB\ST_BAS_TransactionCancelled\ProcessCancel"	"JUMP_ON_RC"  "CheckCoutHostCancel,CheckPrintAbortReceipt"
+
+"CCSTPTAB\ST_BAS_TransactionCancelled\CheckCoutHostCancel"	"STEP_FUNC"    "CHECK_DATA"
+"CCSTPTAB\ST_BAS_TransactionCancelled\CheckCoutHostCancel"	"STEP_PARAM"    "P,ASAICOUT_HOSTCANCEL_TRANSACTION,1"
+"CCSTPTAB\ST_BAS_TransactionCancelled\CheckCoutHostCancel"	"JUMP_ON_RC"    "CheckAuthStatus,CheckAuthStatus,,,,,CheckPrintAbortReceipt"
+
+
+"CCSTPTAB\ST_BAS_TransactionCancelled\CheckAuthStatus"	"STEP_FUNC"    "CHECK_DATA"
+"CCSTPTAB\ST_BAS_TransactionCancelled\CheckAuthStatus"	"STEP_PARAM"    "P,CCTAFW_PROP_AUTHORIZATION_STATUS,C"
+"CCSTPTAB\ST_BAS_TransactionCancelled\CheckAuthStatus"	"JUMP_ON_RC"    "CallCardEject,CallCardEject,,,,,CheckSelectedFunction"
+
+"CCSTPTAB\ST_BAS_TransactionCancelled\CheckSelectedFunction"		"STEP_FUNC"    "CHECK_DATA"
+"CCSTPTAB\ST_BAS_TransactionCancelled\CheckSelectedFunction"		"STEP_PARAM"    "P,CCTAFW_PROP_INTERNAL_FUNCTION_SELECTION_CODE,BAL,TRA"
+"CCSTPTAB\ST_BAS_TransactionCancelled\CheckSelectedFunction"		"JUMP_ON_RC"    "CallCardEject,CallCardEject,,,,,CheckPrintAbortReceipt,CheckPrintAbortReceipt"
+
+
+
+
+
+"CCSTPTAB\ASAI_BAS_Cash_Advance\CardValidate"	"STEP_FUNC"    "BAS_CARD_VALIDATE"
+"CCSTPTAB\ASAI_BAS_Cash_Advance\CardValidate"	"STEP_PARAM"    ""
+"CCSTPTAB\ASAI_BAS_Cash_Advance\CardValidate"	"JUMP_ON_RC"    "CheckCoutHostCancel,ContinueATM,ContinueATM,,ContinueATM,ContinueATM,ContinueATM,ContinueATM,,,,,,,,,,,ContinueATM"
+
+"CCSTPTAB\ASAI_BAS_Cash_Advance\CardValidationtoReject"		"STEP_FUNC"    "ASAICardValidationStep"
+"CCSTPTAB\ASAI_BAS_Cash_Advance\CardValidationtoReject"		"STEP_PARAM"    "ISBINVALIDCOMMAND"
+"CCSTPTAB\ASAI_BAS_Cash_Advance\CardValidationtoReject"		"JUMP_ON_RC"    "CheckCoutHostCancel,ASAIShowCardRejected"
+
+"CCSTPTAB\ASAI_BAS_Cash_Advance\CheckCoutHostCancel"		"STEP_FUNC"    "CHECK_DATA"
+"CCSTPTAB\ASAI_BAS_Cash_Advance\CheckCoutHostCancel"		"STEP_PARAM"    "P,ASAICOUT_HOSTCANCEL_TRANSACTION,1"
+"CCSTPTAB\ASAI_BAS_Cash_Advance\CheckCoutHostCancel"		"JUMP_ON_RC"    "StartActivity,StartActivity,,,,,ResetCoutHostCancel"
+
+"CCSTPTAB\ASAI_BAS_Cash_Advance\ResetCoutHostCancel"		"STEP_FUNC"    "SET_PROPERTY"
+"CCSTPTAB\ASAI_BAS_Cash_Advance\ResetCoutHostCancel"		"STEP_PARAM"    "ASAICOUT_HOSTCANCEL_TRANSACTION,0"
+"CCSTPTAB\ASAI_BAS_Cash_Advance\ResetCoutHostCancel"		"JUMP_ON_RC"    "CheckPrinterStatus,,,,,,,,,,,,,,,,,,Error"
+
+//validate card position and card reader status
+"CCSTPTAB\ASAIST_BAS_IdleLoop\CheckIdleLoop"	"STEP_FUNC"  "BAS_CHECK_IDLE_LOOP"
+"CCSTPTAB\ASAIST_BAS_IdleLoop\CheckIdleLoop"	"STEP_PARAM"  ""
+"CCSTPTAB\ASAIST_BAS_IdleLoop\CheckIdleLoop"	"JUMP_ON_RC"  "SetSessionStart,,CheckForActiveContactLessTran,,ShowCardReaderNotOperationalInfo"
+
+"CCSTPTAB\ASAIST_BAS_IdleLoop\CheckForActiveContactLessTran"	"STEP_FUNC"  "CHECK_DATA"
+"CCSTPTAB\ASAIST_BAS_IdleLoop\CheckForActiveContactLessTran"	"STEP_PARAM"  "P,CCTAFW_PROP_ACTIVE_IDCU_TYPE,-1,3"
+"CCSTPTAB\ASAIST_BAS_IdleLoop\CheckForActiveContactLessTran"	"JUMP_ON_RC"  "CheckCardPosition,CheckCardPosition,,,,,ASAIMEIConnect,ASAIMEIConnect"
+
+"CCSTPTAB\ASAIST_BAS_IdleLoop\CheckCardPosition"	"STEP_FUNC"  "CHECK_DATA"
+"CCSTPTAB\ASAIST_BAS_IdleLoop\CheckCardPosition"	"STEP_PARAM"  "P,CCTAFW_PROP_CARD_POSITION_STATUS,0"
+"CCSTPTAB\ASAIST_BAS_IdleLoop\CheckCardPosition"	"JUMP_ON_RC"  "ASAIMEIConnect,ASAIMEIConnect,,,,,CheckCardOptionRemain"
+
+"CCSTPTAB\ASAIST_BAS_IdleLoop\CheckCardOptionRemain"	"STEP_FUNC"  "CHECK_DATA"
+"CCSTPTAB\ASAIST_BAS_IdleLoop\CheckCardOptionRemain"	"STEP_PARAM"  "P,CCTAFW_PROP_RETURN_CARD_OPTION,0"
+"CCSTPTAB\ASAIST_BAS_IdleLoop\CheckCardOptionRemain"	"JUMP_ON_RC"  "ASAIMEIConnect,ASAIMEIConnect,,,,,SetSessionStart"
+
+
+//verbiage changes
+"Activex\GraphicalService\PCHtmlGen\English\Text"	"GUI_ContinueTransactionQuestion_Instruction"	"[%WX_TEXT[GUI_ContinueTransactionQuestion_Instruction_[&CCTAFW_PROP_INTERNAL_FUNCTION_SELECTION_CODE;;&]];Would you like to another transaction?%]"
+"Activex\GraphicalService\PCHtmlGen\English\Text"	"GUI_ContinueTransactionQuestion_Message"	"[%WX_TEXT[GUI_ContinueTransactionQuestion_Message_[&CCTAFW_PROP_INTERNAL_FUNCTION_SELECTION_CODE;;&]];Please select whether you want to continue with another transaction.%]"
+"Activex\GraphicalService\PCHtmlGen\English\Text"	"GUI_ContinueTransactionQuestion_Instruction_COUT"	"Would you like to try a Cash Advance transaction?"
+"Activex\GraphicalService\PCHtmlGen\English\Text"	"GUI_ContinueTransactionQuestion_Message_COUT"	"Please select whether you want to continue with a Cash Advance transaction."
